@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
     <title>Vue JS Intro</title>
 </head>
 <body>
@@ -18,7 +20,44 @@
         <button v-on:click="buttonClick">Click me</button>
     </div>
 
+    <div id='comp'>
+
+        <ol>
+            <todo-item
+            v-for='item in groceryList'
+            v-bind:todo='item'
+            v-bind:key="item.id"></todo-item>
+        </ol>
+
+
+        <!-- <div id="example-2">
+                <button @click="show = !show">Toggle show</button>
+                <transition name="bounce">
+                  <p v-if="show">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris facilisis enim libero, at lacinia diam fermentum id. Pellentesque habitant morbi tristique senectus et netus.</p>
+                </transition>
+              </div> -->
+
+    </div>
+    <div id="example-3">
+            <button @click="show = !show">
+              Toggle render
+            </button>
+            <transition
+              name="custom-classes-transition"
+              enter-active-class="animated tada"
+              leave-active-class="animated bounceOutRight"
+            >
+              <p v-if="show">hello</p>
+            </transition>
+          </div>
+
+
+
     <script>
+
+
+
+
     new Vue({
         el: '#app',
         data: {
@@ -32,6 +71,38 @@
         }
         });
         
+        Vue.component('todo-item', {
+            props: ['todo'],
+            template: '<li>{{todo.text}}</li>'
+        })
+       var comp = new Vue({
+           el: '#comp',
+           data:{
+               groceryList: [
+                   { id: 0, text: 'Veggies'},
+                   { id: 1, text: 'Cheese'},
+                   { id: 2, text: 'Whatever else humans are supposed to eat.'}
+               ]
+           }
+       })
+
+//        new Vue({
+//   el: '#example-2',
+//   data: {
+//     show: true
+//   }
+// })
+
+new Vue({
+  el: '#example-3',
+  data: {
+    show: true
+  }
+})
+
+
         </script>
+
+
 </body>
 </html>
